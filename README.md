@@ -1,5 +1,8 @@
-# SOLUCIONES DE LOS DEMÁS PUNTOS
-Aquí encontrara la repuesta de los demás puntos:
+# SOLUCION ENTREVISTA TÉCNICA
+
+##Ejercicio 1: Consumo de APIs
+Crea una aplicación Node.js que consuma la API de GitHub y muestre los 10 repositorios
+más populares del usuario "google".
 
 ## Ejercicio 2: Nomenclatura
 Te presentamos el siguiente fragmento de código:
