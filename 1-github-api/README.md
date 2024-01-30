@@ -1,73 +1,80 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Proyecto API Github
+Este proyecto consume la API de Github para retornar los 10 repositorios más populares de una cuenta. El proyecto está hecho en NestJS.
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
+## Instalación
+Asegúrate de tener Node Version Manager (nvm) instalado en tu sistema. Puedes instalarlo desde https://github.com/nvm-sh/nvm.
 
 ```bash
-$ npm install
+# Selecciona la versión de Node.js recomendada para el proyecto
+nvm use
+
+# Instala las dependencias del proyecto
+npm i
 ```
 
-## Running the app
+## Ejecución
+En modo desarrollo:
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm run start:dev
+```
+En modo producción:
+```bash
+npm run start:prod
 ```
 
-## Test
+## Comandos
+| Comando   | Descripción |
+| --------- | ----------- |
+| build     | Compila el proyecto para producción. |
+| format    | Formatea el código fuente con Prettier. |
+| start     | Inicia el servidor en modo desarrollo. |
+| start:dev | Inicia el servidor en modo desarrollo con supervisión. |
+| start:debug | Inicia el servidor en modo desarrollo con depuración. |
+| start:prod | Inicia el servidor en modo producción. |
+| lint      | Ejecuta ESLint para encontrar errores de sintaxis y estilo. |
+| test      | Ejecuta Jest para realizar pruebas unitarias. |
+| test:watch | Ejecuta Jest para realizar pruebas unitarias de forma continua. |
+| test:cov  | Ejecuta Jest para realizar pruebas unitarias y generar una cobertura de código. |
+| test:debug | Ejecuta Jest para realizar pruebas unitarias con depuración. |
+| test:e2e  | Ejecuta Jest para realizar pruebas de extremo a extremo. |
+
+
+## Configuración
+El proyecto utiliza un archivo de configuración llamado example.env. Este archivo contiene las siguientes variables:
+
+| Variable          | Valor |
+| ----------------- | ----- |
+| PORT              | 3000 |
+| GITHUB_API_URL    | https://api.github.com |
+| HTTP_TIMEOUT      | 5000 |
+| HTTP_MAX_REDIRECTS| 5 |
+
+Debes copiar el archivo y renombrarlo como .env
+
+## Docker
+El proyecto incluye un archivo Dockerfile para crear un contenedor Docker. Para crear el contenedor, ejecuta el siguiente comando:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+docker build -t github-api:latest .
 ```
 
-## Support
+Para iniciar el contenedor, ejecuta el siguiente comando:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
+docker run -p 3000:3000 github-api:latest
+```
 
-## Stay in touch
+## Uso
+Para usar la API, envía una solicitud GET a la siguiente URL:
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```bash
+http://localhost:3000/api/github/:user
+```
+Donde ```:user``` es el nombre de usuario de la cuenta de Github.
 
-## License
+Por ejemplo, para obtener los 10 repositorios más populares de la cuenta de google, envía la siguiente solicitud:
 
-Nest is [MIT licensed](LICENSE).
+```bash
+curl http://localhost:3000/api/github/google
+```
